@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "id": 1,
+    "title": "Kobzar",
+    "author": "Taras Shevchenko",
+    "genre": "Poetry",
+    "read": false
+  },
+  {
+    "id": 2,
+    "title": "Forest Song",
+    "author": "Lesya Ukrainka",
+    "genre": "Drama",
+    "read": false
+  },
+  {
+    "id": 3,
+    "title": "The Enchanted Desna",
+    "author": "Oleksandr Dovzhenko",
+    "genre": "Memoir",
+    "read": false
+  },
+  {
+    "id": 4,
+    "title": "The City",
+    "author": "Valerian Pidmohylny",
+    "genre": "Novel",
+    "read": false
+  },
+  {
+    "id": 5,
+    "title": "Marusia Churai",
+    "author": "Lina Kostenko",
+    "genre": "Historical Novel",
+    "read": false
+  },
+  {
+    "id": 6,
+    "title": "Death and the Penguin",
+    "author": "Andrey Kurkov",
+    "genre": "Novel",
+    "read": false
+  }
+]

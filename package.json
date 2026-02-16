@@ -1,0 +1,16 @@
+{
+  "name": "c55-core-week-6",
+  "version": "1.0.0",
+  "description": "The week 6 assignment for the HackYourFuture Core program can be found at the following link: https://hub.hackyourfuture.nl/core-program-week-6-assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
+}
