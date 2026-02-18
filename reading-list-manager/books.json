@@ -18,7 +18,7 @@
     "title": "The Enchanted Desna",
     "author": "Oleksandr Dovzhenko",
     "genre": "Memoir",
-    "read": false
+    "read": true
   },
   {
     "id": 4,
@@ -39,6 +39,6 @@
     "title": "Death and the Penguin",
     "author": "Andrey Kurkov",
     "genre": "Novel",
-    "read": false
+    "read": true
   }
 ]

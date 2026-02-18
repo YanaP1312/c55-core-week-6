@@ -36,7 +36,7 @@ function loadBooks() {
   }
 }
 
-// console.log(loadBooks());
+console.log(loadBooks());
 
 function saveBooks(books) {
   try {
@@ -55,45 +55,45 @@ function saveBooks(books) {
   }
 }
 
-// console.log(
-//   saveBooks([
-//     {
-//       id: 1,
-//       title: 'Kobzar',
-//       author: 'Taras Shevchenko',
-//       genre: 'Poetry',
-//       read: false,
-//     },
-//     {
-//       id: 2,
-//       title: 'Forest Song',
-//       author: 'Lesya Ukrainka',
-//       genre: 'Drama',
-//       read: false,
-//     },
-//     {
-//       id: 3,
-//       title: 'The Enchanted Desna',
-//       author: 'Oleksandr Dovzhenko',
-//       genre: 'Memoir',
-//       read: false,
-//     },
-//     {
-//       id: 4,
-//       title: 'The City',
-//       author: 'Valerian Pidmohylny',
-//       genre: 'Novel',
-//       read: false,
-//     },
-//     {
-//       id: 5,
-//       title: 'Marusia Churai',
-//       author: 'Lina Kostenko',
-//       genre: 'Historical Novel',
-//       read: false,
-//     },
-//   ])
-// );
+console.log(
+  saveBooks([
+    {
+      id: 1,
+      title: 'Kobzar',
+      author: 'Taras Shevchenko',
+      genre: 'Poetry',
+      read: false,
+    },
+    {
+      id: 2,
+      title: 'Forest Song',
+      author: 'Lesya Ukrainka',
+      genre: 'Drama',
+      read: false,
+    },
+    {
+      id: 3,
+      title: 'The Enchanted Desna',
+      author: 'Oleksandr Dovzhenko',
+      genre: 'Memoir',
+      read: true,
+    },
+    {
+      id: 4,
+      title: 'The City',
+      author: 'Valerian Pidmohylny',
+      genre: 'Novel',
+      read: false,
+    },
+    {
+      id: 5,
+      title: 'Marusia Churai',
+      author: 'Lina Kostenko',
+      genre: 'Historical Novel',
+      read: false,
+    },
+  ])
+);
 
 function addBook(book) {
   try {
@@ -114,35 +114,59 @@ function addBook(book) {
   }
 }
 
-// console.log(
-//   addBook({
-//     id: 6,
-//     title: 'Death and the Penguin',
-//     author: 'Andrey Kurkov',
-//     genre: 'Novel',
-//     read: false,
-//   })
-// );
+console.log(
+  addBook({
+    id: 6,
+    title: 'Death and the Penguin',
+    author: 'Andrey Kurkov',
+    genre: 'Novel',
+    read: true,
+  })
+);
 
 function getUnreadBooks() {
-  // TODO: Implement this function using filter()
+  const books = loadBooks();
+  const unreadBooks = books.filter((book) => !book.read);
+  return unreadBooks;
 }
+
+console.log('Get unread books:', getUnreadBooks());
 
 function getBooksByGenre(genre) {
-  // TODO: Implement this function using filter()
+  const books = loadBooks();
+  const booksByGenre = books.filter((book) => book.genre === genre);
+  return booksByGenre;
 }
+
+console.log('Get books by genre:', getBooksByGenre('Novel'));
 
 function markAsRead(id) {
-  // TODO: Implement this function using map()
+  const books = loadBooks();
+  const updateForRead = books.map((book) => {
+    if (book.id === id) {
+      return { ...book, read: true };
+    }
+    return book;
+  });
+  return updateForRead;
 }
+
+console.log('After read update:', markAsRead(1));
 
 function getTotalBooks() {
-  // TODO: Implement this function using length
+  const books = loadBooks();
+  return books.length;
 }
 
+console.log('Total books:', getTotalBooks());
+
 function hasUnreadBooks() {
-  // TODO: Implement this function using some()
+  const books = loadBooks();
+  const hasUnreadBooks = books.some((book) => !book.read);
+  return hasUnreadBooks;
 }
+
+console.log('Has unread books?', hasUnreadBooks());
 
 function printAllBooks() {
   // TODO: Implement this function
