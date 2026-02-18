@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import chalk from 'chalk';
 
 const dataDir = 'reading-list-manager';
 const filePath = path.join(dataDir, 'books.json');
@@ -12,7 +13,7 @@ function isDataFull(book) {
 
 // Place here the file operation functions for loading and saving books
 
-function loadBooks() {
+export function loadBooks() {
   try {
     const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
@@ -36,9 +37,7 @@ function loadBooks() {
   }
 }
 
-console.log(loadBooks());
-
-function saveBooks(books) {
+export function saveBooks(books) {
   try {
     if (!Array.isArray(books)) {
       throw new Error("Books file doesn't contain an array");
@@ -55,47 +54,47 @@ function saveBooks(books) {
   }
 }
 
-console.log(
-  saveBooks([
-    {
-      id: 1,
-      title: 'Kobzar',
-      author: 'Taras Shevchenko',
-      genre: 'Poetry',
-      read: false,
-    },
-    {
-      id: 2,
-      title: 'Forest Song',
-      author: 'Lesya Ukrainka',
-      genre: 'Drama',
-      read: false,
-    },
-    {
-      id: 3,
-      title: 'The Enchanted Desna',
-      author: 'Oleksandr Dovzhenko',
-      genre: 'Memoir',
-      read: true,
-    },
-    {
-      id: 4,
-      title: 'The City',
-      author: 'Valerian Pidmohylny',
-      genre: 'Novel',
-      read: false,
-    },
-    {
-      id: 5,
-      title: 'Marusia Churai',
-      author: 'Lina Kostenko',
-      genre: 'Historical Novel',
-      read: false,
-    },
-  ])
-);
+// console.log(
+//   saveBooks([
+//     {
+//       id: 1,
+//       title: 'Kobzar',
+//       author: 'Taras Shevchenko',
+//       genre: 'Poetry',
+//       read: false,
+//     },
+//     {
+//       id: 2,
+//       title: 'Forest Song',
+//       author: 'Lesya Ukrainka',
+//       genre: 'Drama',
+//       read: false,
+//     },
+//     {
+//       id: 3,
+//       title: 'The Enchanted Desna',
+//       author: 'Oleksandr Dovzhenko',
+//       genre: 'Memoir',
+//       read: true,
+//     },
+//     {
+//       id: 4,
+//       title: 'The City',
+//       author: 'Valerian Pidmohylny',
+//       genre: 'Novel',
+//       read: false,
+//     },
+//     {
+//       id: 5,
+//       title: 'Marusia Churai',
+//       author: 'Lina Kostenko',
+//       genre: 'Historical Novel',
+//       read: false,
+//     },
+//   ])
+// );
 
-function addBook(book) {
+export function addBook(book) {
   try {
     if (!isDataFull(book)) {
       throw new Error('Book must has id, title, author and genre');
@@ -114,33 +113,31 @@ function addBook(book) {
   }
 }
 
-console.log(
-  addBook({
-    id: 6,
-    title: 'Death and the Penguin',
-    author: 'Andrey Kurkov',
-    genre: 'Novel',
-    read: true,
-  })
-);
+// console.log(
+//   addBook({
+//     id: 6,
+//     title: 'Death and the Penguin',
+//     author: 'Andrey Kurkov',
+//     genre: 'Novel',
+//     read: true,
+//   })
+// );
 
-function getUnreadBooks() {
+export function getUnreadBooks() {
   const books = loadBooks();
   const unreadBooks = books.filter((book) => !book.read);
   return unreadBooks;
 }
 
-console.log('Get unread books:', getUnreadBooks());
+// console.log('Get unread books:', getUnreadBooks());
 
-function getBooksByGenre(genre) {
+export function getBooksByGenre(genre) {
   const books = loadBooks();
   const booksByGenre = books.filter((book) => book.genre === genre);
   return booksByGenre;
 }
 
-console.log('Get books by genre:', getBooksByGenre('Novel'));
-
-function markAsRead(id) {
+export function markAsRead(id) {
   const books = loadBooks();
   const updateForRead = books.map((book) => {
     if (book.id === id) {
@@ -151,33 +148,42 @@ function markAsRead(id) {
   return updateForRead;
 }
 
-console.log('After read update:', markAsRead(1));
-
-function getTotalBooks() {
+export function getTotalBooks() {
   const books = loadBooks();
   return books.length;
 }
 
-console.log('Total books:', getTotalBooks());
+// console.log('Total books:', getTotalBooks());
 
-function hasUnreadBooks() {
+export function hasUnreadBooks() {
   const books = loadBooks();
   const hasUnreadBooks = books.some((book) => !book.read);
   return hasUnreadBooks;
 }
 
-console.log('Has unread books?', hasUnreadBooks());
+// console.log('Has unread books?', hasUnreadBooks());
 
-function printAllBooks() {
-  // TODO: Implement this function
-  // Loop through and display with chalk
-  // Use green for read books, yellow for unread
-  // Use cyan for titles
+export function printAllBooks() {
+  const books = loadBooks();
+  let output = '\n📚 MY READING LIST 📚 \n\nAll books:\n\n';
+
+  for (const book of books) {
+    const { id, title, author, genre, read } = book;
+    const readChalk = read ? chalk.green('📗 Read') : chalk.yellow('📕 Unread');
+    const titleChalk = chalk.cyan(title);
+
+    output += `${id + 1}. ${titleChalk} by ${author} (${genre}) ${readChalk}\n`;
+  }
+
+  return output;
 }
 
-function printSummary() {
-  // TODO: Implement this function
-  // Show statistics with chalk
-  // Display total books, read count, unread count
-  // Use bold for stats
+export function printSummary() {
+  const totalBooks = getTotalBooks();
+  const unreadBooks = getUnreadBooks().length;
+  const readBooks = totalBooks - unreadBooks;
+
+  const output = `\n📊 SUMMARY 📊\n\n${chalk.bold(`Total Books: ${totalBooks}\nRead: ${readBooks}\nUnread: ${unreadBooks}`)}`;
+
+  return output;
 }
