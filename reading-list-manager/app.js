@@ -16,8 +16,6 @@ import {
 // 4. Add example of filtering by genre or read/unread status
 // 5. Add example of marking a book as read
 
-// console.log('📚 MY READING LIST 📚\n');
-
 // Your implementation here
 console.log(loadBooks());
 console.log(printAllBooks());
